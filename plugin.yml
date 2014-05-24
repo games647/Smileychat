@@ -1,0 +1,106 @@
+name: Smileychat
+main: net.flamm3blemuff1n.SmileyChat.Smileychat
+description: ${project.description}
+author: flamm3blemuff1n
+version: 2.5
+softdepend: [Vault, Herochat, Essentials]
+commands:
+    smileychat:
+        description: show info about smileychat
+    sc:
+        description: show info about smileychat
+        permission: smileychat.info
+    reload:
+        description: reload smileychat
+        permission: smileychat.reload
+    smileys:
+        description: list all smileys
+        permission: smileychat.list
+permissions:
+    smileychat.*:
+        description: Gives access to all.
+        default: op
+        children:
+            smileychat.chat.smileys: true
+            smileychat.chat.art: true
+            smileychat.chat.custom: true
+            smileychat.sign.smileys: true
+            smileychat.sign.art: true
+            smileychat.sign.custom: true
+            smileychat.command.smileys: true
+            smileychat.command.art: true
+            smileychat.command.custom: true
+            smileychat.book.smileys: true
+            smileychat.book.art: true
+            smileychat.book.custom: true
+            smileychat.update: true
+            smileychat.reload: true
+            smileychat.list: true
+            smileychat.info: true
+    smileychat.chat.*:
+        description: Gives access to all chat smileys.
+        default: op
+        children:
+            smileychat.chat.smileys: true
+            smileychat.chat.art: true
+            smileychat.chat.custom: true
+    smileychat.sign.*:
+        description: Gives access to all sign smileys.
+        default: op
+        children:
+            smileychat.sign.smileys: true
+            smileychat.sign.art: true
+            smileychat.sign.custom: true
+    smileychat.command.*:
+        description: Gives access to all command smileys.
+        default: op
+        children:
+            smileychat.command.smileys: true
+            smileychat.command.art: true
+            smileychat.command.custom: true
+    smileychat.book.*:
+        description: Gives acces to all book smielys.
+        default: op
+        children:
+            smileychat.book.smileys: true
+            smileychat.book.art: true
+            smileychat.book.custom: true
+    smileychat.chat.smileys:
+        description: allows user to use smileys in chat.
+        default: op
+    smileychat.chat.custom:
+        description: allows user to use custom smileys in chat.
+        default: op
+    smileychat.chat.art:
+        description: allows user to use ascii art in chat.
+        default: op
+    smileychat.sign.smileys:
+        description: allows user to use smileys on signs.
+        default: op
+    smileychat.sign.custom:
+        description: allows user to use custom smileys on signs.
+        default: op
+    smileychat.sign.art:
+        description: allows user to use ascii art on signs.
+        default: op        
+    smileychat.command.smileys:
+        description: allows user to use smileys in commands.
+        default: op
+    smileychat.command.custom:
+        description: allows user to use custom smileys in commands.
+        default: op
+    smileychat.command.art:
+        description: allows user to use ascii art in commands.
+        default: op
+    smileychat.book.smileys:
+        description: allows user to use smileys in books.
+        default: op
+    smileychat.book.custom:
+        description: allows user to use custom smileys in books.
+        default: op
+    smileychat.book.art:
+        description: allows user to use ascii art in books.
+        default: op
+    smileychat.update:
+        description: get notification on updates
+        default: op
