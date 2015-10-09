@@ -1,9 +1,14 @@
 package net.flamm3blemuff1n.SmileyChat;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
+import org.bukkit.event.player.PlayerEditBookEvent;
+import org.bukkit.inventory.meta.BookMeta;
 
 import com.dthielke.herochat.ChannelChatEvent;
 
@@ -130,5 +135,108 @@ public class HeroSmileys implements Listener{
 				}
 			}
 		}
+	}
+	@EventHandler
+	public void OnBookCreate(PlayerEditBookEvent event){
+		BookMeta bm = event.getNewBookMeta();
+		String Author = bm.getAuthor();
+		String Title = bm.getTitle();
+		
+		if(this.plugin.getConfig().getBoolean("Use-books") == true){
+			if(event.getPlayer().hasPermission("smileychat.book.smileys")){
+				if(bm.hasAuthor()){
+					int x = 0;
+					while(x < net.flamm3blemuff1n.SmileyChat.Smileys.names.length){
+						Author = Author.replace(plugin.getConfig().getString(net.flamm3blemuff1n.SmileyChat.Smileys.names[x]), net.flamm3blemuff1n.SmileyChat.Smileys.smiley[x]);
+						bm.setAuthor(Author);
+						x++;
+					}
+				}
+				if(bm.hasTitle()){
+					int x = 0;
+					while(x < net.flamm3blemuff1n.SmileyChat.Smileys.names.length){
+						Title = Title.replace(plugin.getConfig().getString(net.flamm3blemuff1n.SmileyChat.Smileys.names[x]), net.flamm3blemuff1n.SmileyChat.Smileys.smiley[x]);
+						bm.setTitle(Title);
+						x++;
+					}
+				}
+				if ((bm.hasPages()) && (bm.getPages().size() > 0)){
+					List<String> pages = bm.getPages();
+					List<String> newPages = new ArrayList<String>(pages.size());
+					for(String page : pages){
+						int x = 0;
+						while(x < net.flamm3blemuff1n.SmileyChat.Smileys.names.length){
+							page = page.replace(plugin.getConfig().getString(net.flamm3blemuff1n.SmileyChat.Smileys.names[x]), net.flamm3blemuff1n.SmileyChat.Smileys.smiley[x]);
+							x++;
+						}
+						newPages.add(page);
+					}
+					bm.setPages(newPages);	
+				}	
+			}
+			if(event.getPlayer().hasPermission("smileychat.book.art")){
+				if(bm.hasAuthor()){
+					int x = 0;
+					while(x < net.flamm3blemuff1n.SmileyChat.Smileys.nameart.length){
+						Author = Author.replace(plugin.getConfig().getString(net.flamm3blemuff1n.SmileyChat.Smileys.nameart[x]), net.flamm3blemuff1n.SmileyChat.Smileys.art[x]);
+						bm.setAuthor(Author);
+						x++;
+					}
+				}
+				if(bm.hasTitle()){
+					int x = 0;
+					while(x < net.flamm3blemuff1n.SmileyChat.Smileys.nameart.length){
+						Title = Title.replace(plugin.getConfig().getString(net.flamm3blemuff1n.SmileyChat.Smileys.nameart[x]), net.flamm3blemuff1n.SmileyChat.Smileys.art[x]);
+						bm.setTitle(Title);
+						x++;
+					}
+				}
+				if ((bm.hasPages()) && (bm.getPages().size() > 0)){
+					List<String> pages = bm.getPages();
+					List<String> newPages = new ArrayList<String>(pages.size());
+					for(String page : pages){
+						int x = 0;
+						while(x < net.flamm3blemuff1n.SmileyChat.Smileys.nameart.length){
+							page = page.replace(plugin.getConfig().getString(net.flamm3blemuff1n.SmileyChat.Smileys.nameart[x]), net.flamm3blemuff1n.SmileyChat.Smileys.art[x]);
+							x++;
+						}
+						newPages.add(page);
+					}
+					bm.setPages(newPages);
+			    }
+			}
+			if(event.getPlayer().hasPermission("smileychat.book.custom")){
+				if(bm.hasAuthor()){
+					int x = 0;
+					while(x < net.flamm3blemuff1n.SmileyChat.Smileys.custominput.length){
+						Author = Author.replace(plugin.getConfig().getString(net.flamm3blemuff1n.SmileyChat.Smileys.custominput[x]), net.flamm3blemuff1n.SmileyChat.Smileys.customoutput[x]);
+						bm.setAuthor(Author);
+						x++;
+					}
+				}
+				if(bm.hasTitle()){
+					int x = 0;
+					while(x < net.flamm3blemuff1n.SmileyChat.Smileys.custominput.length){
+						Title = Title.replace(plugin.getConfig().getString(net.flamm3blemuff1n.SmileyChat.Smileys.custominput[x]), net.flamm3blemuff1n.SmileyChat.Smileys.customoutput[x]);
+						bm.setTitle(Title);
+						x++;
+					}
+				}
+				if ((bm.hasPages()) && (bm.getPages().size() > 0)){
+					List<String> pages = bm.getPages();
+					List<String> newPages = new ArrayList<String>(pages.size());
+					for(String page : pages){
+						int x = 0;
+						while(x < net.flamm3blemuff1n.SmileyChat.Smileys.custominput.length){
+							page = page.replace(plugin.getConfig().getString(net.flamm3blemuff1n.SmileyChat.Smileys.custominput[x]), net.flamm3blemuff1n.SmileyChat.Smileys.customoutput[x]);
+							x++;
+						}
+						newPages.add(page);
+					}
+					bm.setPages(newPages);
+			    }
+			}
+		}
+		event.setNewBookMeta(bm);
 	}
 }

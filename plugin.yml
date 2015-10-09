@@ -2,7 +2,7 @@ name: Smileychat
 main: net.flamm3blemuff1n.SmileyChat.Smileychat
 description: ${project.description}
 author: flamm3blemuff1n
-version: 2.5
+version: 3.1
 softdepend: [Vault, Herochat, Essentials]
 commands:
     smileychat:
@@ -15,6 +15,9 @@ commands:
         permission: smileychat.reload
     smileys:
         description: list all smileys
+        permission: smileychat.list
+    art:
+        description: list all ascii-art
         permission: smileychat.list
 permissions:
     smileychat.*:

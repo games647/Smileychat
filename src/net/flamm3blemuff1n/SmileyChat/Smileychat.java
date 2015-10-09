@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 
 import net.flamm3blemuff1n.SmileyChat.UpdateChecker.UpdateResult;
 import net.flamm3blemuff1n.SmileyChat.UpdateChecker.UpdateType;
-import net.minecraft.server.v1_7_R3.SharedConstants;
+import net.minecraft.server.v1_8_R3.SharedConstants;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -19,7 +19,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.fusesource.jansi.Ansi;
 
 public class Smileychat extends JavaPlugin implements Listener{
 	public final Logger logger = Logger.getLogger("Minecraft");
@@ -40,11 +39,9 @@ public class Smileychat extends JavaPlugin implements Listener{
 		if(this.getConfig().getBoolean("Update-check") == true){
 			this.updateChecker = new UpdateChecker(this, 57551, this.getFile(), UpdateType.NO_DOWNLOAD, false);
 			if(this.updateChecker.getResult() == UpdateResult.UPDATE_AVAILABLE){
-				System.out.println(Ansi.ansi().fg(Ansi.Color.MAGENTA) + "[SmileyChat]" + Ansi.ansi().fg(Ansi.Color.CYAN) + 
-						" A new Version is available: " + this.updateChecker.getLatestName() + Ansi.ansi().fg(Ansi.Color.DEFAULT) );
+				System.out.println("[SmileyChat] A new Version is available: " + this.updateChecker.getLatestName());
 				
-				System.out.println(Ansi.ansi().fg(Ansi.Color.MAGENTA) + "[SmileyChat]" + Ansi.ansi().fg(Ansi.Color.CYAN) +  
-						" Get it from: http://dev.bukkit.org/bukkit-plugins/smileychat/" + Ansi.ansi().fg(Ansi.Color.DEFAULT));
+				System.out.println("[SmileyChat] Get it from: http://dev.bukkit.org/bukkit-plugins/smileychat/");
 			}
 		}
 		
@@ -56,23 +53,15 @@ public class Smileychat extends JavaPlugin implements Listener{
 		}
 		
 		PluginDescriptionFile pdfFile = this.getDescription();
-		System.out.print(Ansi.ansi().fg(Ansi.Color.MAGENTA)+ "[SmileyChat]" + Ansi.ansi().fg(Ansi.Color.CYAN) + " version " + pdfFile.getVersion() + " Has been Enabled!" + Ansi.ansi().fg(Ansi.Color.DEFAULT));
+		System.out.print("[SmileyChat] version " + pdfFile.getVersion() + " Has been Enabled!");
 		PluginManager pm = getServer().getPluginManager();
 		
 		if (getServer().getPluginManager().getPlugin("Herochat") != null){
-			if(this.getConfig().getBoolean("Herochat") == false){
 				pm.registerEvents(this.HeroSmileys, this);
-				System.out.println(Ansi.ansi().fg(Ansi.Color.MAGENTA) + "[SmileyChat]" + Ansi.ansi().fg(Ansi.Color.CYAN) + 
-						" Using: Herochat!, Herochat was found on your server." + Ansi.ansi().fg(Ansi.Color.DEFAULT) );
-			} else if(this.getConfig().getBoolean("Herochat") == true){
-				pm.registerEvents(this.HeroSmileys, this);
-				System.out.println(Ansi.ansi().fg(Ansi.Color.MAGENTA) + "[SmileyChat]" + Ansi.ansi().fg(Ansi.Color.CYAN) + 
-						" Using: Herochat!" + Ansi.ansi().fg(Ansi.Color.DEFAULT) );
-			}
+				System.out.println("[SmileyChat] Using: Herochat!");
 		} else if(getServer().getPluginManager().getPlugin("HeroChat") == null){
 			pm.registerEvents(this.PlayerListener, this);
-			System.out.println(Ansi.ansi().fg(Ansi.Color.MAGENTA) + "[SmileyChat]" + Ansi.ansi().fg(Ansi.Color.CYAN) + 
-					" Using: Normal Minecraft Chat." + Ansi.ansi().fg(Ansi.Color.DEFAULT) );
+			System.out.println("[SmileyChat] Using: Normal Minecraft Chat.");
 		}
 		this.saveDefaultConfig();
 		pm.registerEvents(this, this);
@@ -106,7 +95,7 @@ public class Smileychat extends JavaPlugin implements Listener{
         			sender.sendMessage(ChatColor.AQUA +      "By flamm3blemuff1n");
         			sender.sendMessage(ChatColor.YELLOW +     "Version: " + this.getDescription().getVersion());
         			sender.sendMessage(ChatColor.DARK_GREEN + "+------------------------------+");
-        		}else if(sender.getName().equals("flammeblemuffin")){
+        		}else if(sender.getName().equals("flamm3blemuff1n")){
         			sender.sendMessage(ChatColor.DARK_GREEN + "+------------------------------+");
         			sender.sendMessage(ChatColor.AQUA +  "SmileyChat");
         			sender.sendMessage(ChatColor.AQUA +      "Server Has installed Smileychat succesfully!");
@@ -121,14 +110,62 @@ public class Smileychat extends JavaPlugin implements Listener{
 	                    sender.sendMessage(ChatColor.AQUA + "[Smileychat] Plugin reloaded!");
 	                    System.out.print("[smileychat] Reloaded!");
 	        		}
-				}
-				else if(args[0].equalsIgnoreCase("smileys")) {
+				}else if(args[0].equalsIgnoreCase("art")){
 					if(sender.hasPermission("smileychat.list")){
 						int x = 0;
 						sender.sendMessage(ChatColor.AQUA + "---[Smileychat] List---");
-						while(x < net.flamm3blemuff1n.SmileyChat.Smileys.names.length){
-							sender.sendMessage(net.flamm3blemuff1n.SmileyChat.Smileys.smiley[x] + " : " + this.getConfig().getString(net.flamm3blemuff1n.SmileyChat.Smileys.names[x]));
+						while(x < net.flamm3blemuff1n.SmileyChat.Smileys.art.length){
+							sender.sendMessage(ChatColor.YELLOW + net.flamm3blemuff1n.SmileyChat.Smileys.art[x] + " : " + ChatColor.AQUA +this.getConfig().getString(net.flamm3blemuff1n.SmileyChat.Smileys.nameart[x]));
 							x++;
+						}
+					}
+				}
+			}
+			if (args.length == 2){
+				if (args[0].equalsIgnoreCase("smileys")){
+					if(sender.hasPermission("smileychat.list")){
+						if (args[1].equalsIgnoreCase("misc")){
+							int x = 0;
+							sender.sendMessage(ChatColor.AQUA + "---[Smileychat] List---");
+							while(x < 35){
+								sender.sendMessage(ChatColor.YELLOW + net.flamm3blemuff1n.SmileyChat.Smileys.smiley[x] + " : " + ChatColor.AQUA +this.getConfig().getString(net.flamm3blemuff1n.SmileyChat.Smileys.names[x]));
+								x++;
+							}
+						}else if(args[1].equalsIgnoreCase("weather")){
+							int x = 35;
+							sender.sendMessage(ChatColor.AQUA + "---[Smileychat] List---");
+							while(x < 47){
+								sender.sendMessage(ChatColor.YELLOW + net.flamm3blemuff1n.SmileyChat.Smileys.smiley[x] + " : " + ChatColor.AQUA +this.getConfig().getString(net.flamm3blemuff1n.SmileyChat.Smileys.names[x]));
+								x++;
+							}
+						}else if(args[1].equalsIgnoreCase("cards")){
+							int x = 47;
+							sender.sendMessage(ChatColor.AQUA + "---[Smileychat] List---");
+							while(x < 55){
+								sender.sendMessage(ChatColor.YELLOW + net.flamm3blemuff1n.SmileyChat.Smileys.smiley[x] + " : " + ChatColor.AQUA +this.getConfig().getString(net.flamm3blemuff1n.SmileyChat.Smileys.names[x]));
+								x++;
+							}
+						}else if(args[1].equalsIgnoreCase("directions")){
+							int x = 55;
+							sender.sendMessage(ChatColor.AQUA + "---[Smileychat] List---");
+							while(x < 63){
+								sender.sendMessage(ChatColor.YELLOW + net.flamm3blemuff1n.SmileyChat.Smileys.smiley[x] + " : " + ChatColor.AQUA +this.getConfig().getString(net.flamm3blemuff1n.SmileyChat.Smileys.names[x]));
+								x++;
+							}
+						}else if(args[1].equalsIgnoreCase("chess")){
+							int x = 63;
+							sender.sendMessage(ChatColor.AQUA + "---[Smileychat] List---");
+							while(x < 75){
+								sender.sendMessage(ChatColor.YELLOW + net.flamm3blemuff1n.SmileyChat.Smileys.smiley[x] + " : " + ChatColor.AQUA +this.getConfig().getString(net.flamm3blemuff1n.SmileyChat.Smileys.names[x]));
+								x++;
+							}
+						}else if(args[1].equalsIgnoreCase("zod")){
+							int x = 75;
+							sender.sendMessage(ChatColor.AQUA + "---[Smileychat] List---");
+							while(x < 87){
+								sender.sendMessage(ChatColor.YELLOW + net.flamm3blemuff1n.SmileyChat.Smileys.smiley[x] + " : " + ChatColor.AQUA +this.getConfig().getString(net.flamm3blemuff1n.SmileyChat.Smileys.names[x]));
+								x++;
+							}
 						}
 					}
 				}
@@ -151,14 +188,62 @@ public class Smileychat extends JavaPlugin implements Listener{
 	                    sender.sendMessage(ChatColor.AQUA + "[Smileychat] Plugin reloaded!");
 	                    System.out.print("[smileychat] Reloaded!");
 	        		}
-				}
-				else if(args[0].equalsIgnoreCase("smileys")) {
+				}else if(args[0].equalsIgnoreCase("art")){
 					if(sender.hasPermission("smileychat.list")){
 						int x = 0;
 						sender.sendMessage(ChatColor.AQUA + "---[Smileychat] List---");
-						while(x < net.flamm3blemuff1n.SmileyChat.Smileys.names.length){
-							sender.sendMessage(net.flamm3blemuff1n.SmileyChat.Smileys.smiley[x] + " : " + this.getConfig().getString(net.flamm3blemuff1n.SmileyChat.Smileys.names[x]));
+						while(x < net.flamm3blemuff1n.SmileyChat.Smileys.art.length){
+							sender.sendMessage(ChatColor.YELLOW + net.flamm3blemuff1n.SmileyChat.Smileys.art[x] + " : " + ChatColor.AQUA +this.getConfig().getString(net.flamm3blemuff1n.SmileyChat.Smileys.nameart[x]));
 							x++;
+						}
+					}
+				}
+			}
+			if (args.length == 2){
+				if (args[0].equalsIgnoreCase("smileys")){
+					if(sender.hasPermission("smileychat.list")){
+						if (args[1].equalsIgnoreCase("misc")){
+							int x = 0;
+							sender.sendMessage(ChatColor.AQUA + "---[Smileychat] List---");
+							while(x < 35){
+								sender.sendMessage(ChatColor.YELLOW + net.flamm3blemuff1n.SmileyChat.Smileys.smiley[x] + " : " + ChatColor.AQUA +this.getConfig().getString(net.flamm3blemuff1n.SmileyChat.Smileys.names[x]));
+								x++;
+							}
+						}else if(args[1].equalsIgnoreCase("weather")){
+							int x = 35;
+							sender.sendMessage(ChatColor.AQUA + "---[Smileychat] List---");
+							while(x < 47){
+								sender.sendMessage(ChatColor.YELLOW + net.flamm3blemuff1n.SmileyChat.Smileys.smiley[x] + " : " + ChatColor.AQUA +this.getConfig().getString(net.flamm3blemuff1n.SmileyChat.Smileys.names[x]));
+								x++;
+							}
+						}else if(args[1].equalsIgnoreCase("cards")){
+							int x = 47;
+							sender.sendMessage(ChatColor.AQUA + "---[Smileychat] List---");
+							while(x < 55){
+								sender.sendMessage(ChatColor.YELLOW + net.flamm3blemuff1n.SmileyChat.Smileys.smiley[x] + " : " + ChatColor.AQUA +this.getConfig().getString(net.flamm3blemuff1n.SmileyChat.Smileys.names[x]));
+								x++;
+							}
+						}else if(args[1].equalsIgnoreCase("directions")){
+							int x = 55;
+							sender.sendMessage(ChatColor.AQUA + "---[Smileychat] List---");
+							while(x < 63){
+								sender.sendMessage(ChatColor.YELLOW + net.flamm3blemuff1n.SmileyChat.Smileys.smiley[x] + " : " + ChatColor.AQUA +this.getConfig().getString(net.flamm3blemuff1n.SmileyChat.Smileys.names[x]));
+								x++;
+							}
+						}else if(args[1].equalsIgnoreCase("chess")){
+							int x = 63;
+							sender.sendMessage(ChatColor.AQUA + "---[Smileychat] List---");
+							while(x < 75){
+								sender.sendMessage(ChatColor.YELLOW + net.flamm3blemuff1n.SmileyChat.Smileys.smiley[x] + " : " + ChatColor.AQUA +this.getConfig().getString(net.flamm3blemuff1n.SmileyChat.Smileys.names[x]));
+								x++;
+							}
+						}else if(args[1].equalsIgnoreCase("zod")){
+							int x = 75;
+							sender.sendMessage(ChatColor.AQUA + "---[Smileychat] List---");
+							while(x < 87){
+								sender.sendMessage(ChatColor.YELLOW + net.flamm3blemuff1n.SmileyChat.Smileys.smiley[x] + " : " + ChatColor.AQUA +this.getConfig().getString(net.flamm3blemuff1n.SmileyChat.Smileys.names[x]));
+								x++;
+							}
 						}
 					}
 				}

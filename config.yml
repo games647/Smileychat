@@ -5,8 +5,6 @@ chat: true
 Use-signs: true
 Use-commands: true
 Use-books: true
-#Other plugins? Only one can be true!
-Herochat: false
 #+++++++++++++++++++++++++++++++++++++++#
 #                                       #
 #           Smiley Inputs               #
