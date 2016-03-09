@@ -5,6 +5,7 @@ chat: true
 Use-signs: true
 Use-commands: true
 Use-books: true
+use-alias-sc: true
 #+++++++++++++++++++++++++++++++++++++++#
 #                                       #
 #           Smiley Inputs               #

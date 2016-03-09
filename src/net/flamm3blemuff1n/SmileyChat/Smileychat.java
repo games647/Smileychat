@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 
 import net.flamm3blemuff1n.SmileyChat.UpdateChecker.UpdateResult;
 import net.flamm3blemuff1n.SmileyChat.UpdateChecker.UpdateType;
-import net.minecraft.server.v1_8_R3.SharedConstants;
+import net.minecraft.server.v1_9_R1.SharedConstants;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -171,78 +171,81 @@ public class Smileychat extends JavaPlugin implements Listener{
 				}
 			}
 		}
-		if(label.equalsIgnoreCase("sc")){
-			if (args.length == 0) {
-				if(sender.hasPermission("smileychat.info")){
-        			sender.sendMessage(ChatColor.DARK_GREEN + "+------------------------------+");
-        			sender.sendMessage(ChatColor.AQUA +  "SmileyChat");
-        			sender.sendMessage(ChatColor.AQUA +      "By flamm3blemuff1n");
-        			sender.sendMessage(ChatColor.YELLOW +     "Version:" + this.getDescription().getVersion());
-        			sender.sendMessage(ChatColor.DARK_GREEN + "+------------------------------+");
-        		}
-			}
-			if (args.length == 1){
-				if (args[0].equalsIgnoreCase("reload")) {
-					if(sender.hasPermission("smileychat.reload")){
-	        			reloadConfig();
-	                    sender.sendMessage(ChatColor.AQUA + "[Smileychat] Plugin reloaded!");
-	                    System.out.print("[smileychat] Reloaded!");
+		
+		if(this.getConfig().getBoolean("use-alias-sc") == true){
+			if(label.equalsIgnoreCase("sc")){
+				if (args.length == 0) {
+					if(sender.hasPermission("smileychat.info")){
+	        			sender.sendMessage(ChatColor.DARK_GREEN + "+------------------------------+");
+	        			sender.sendMessage(ChatColor.AQUA +  "SmileyChat");
+	        			sender.sendMessage(ChatColor.AQUA +      "By flamm3blemuff1n");
+	        			sender.sendMessage(ChatColor.YELLOW +     "Version:" + this.getDescription().getVersion());
+	        			sender.sendMessage(ChatColor.DARK_GREEN + "+------------------------------+");
 	        		}
-				}else if(args[0].equalsIgnoreCase("art")){
-					if(sender.hasPermission("smileychat.list")){
-						int x = 0;
-						sender.sendMessage(ChatColor.AQUA + "---[Smileychat] List---");
-						while(x < net.flamm3blemuff1n.SmileyChat.Smileys.art.length){
-							sender.sendMessage(ChatColor.YELLOW + net.flamm3blemuff1n.SmileyChat.Smileys.art[x] + " : " + ChatColor.AQUA +this.getConfig().getString(net.flamm3blemuff1n.SmileyChat.Smileys.nameart[x]));
-							x++;
+				}
+				if (args.length == 1){
+					if (args[0].equalsIgnoreCase("reload")) {
+						if(sender.hasPermission("smileychat.reload")){
+		        			reloadConfig();
+		                    sender.sendMessage(ChatColor.AQUA + "[Smileychat] Plugin reloaded!");
+		                    System.out.print("[smileychat] Reloaded!");
+		        		}
+					}else if(args[0].equalsIgnoreCase("art")){
+						if(sender.hasPermission("smileychat.list")){
+							int x = 0;
+							sender.sendMessage(ChatColor.AQUA + "---[Smileychat] List---");
+							while(x < net.flamm3blemuff1n.SmileyChat.Smileys.art.length){
+								sender.sendMessage(ChatColor.YELLOW + net.flamm3blemuff1n.SmileyChat.Smileys.art[x] + " : " + ChatColor.AQUA +this.getConfig().getString(net.flamm3blemuff1n.SmileyChat.Smileys.nameart[x]));
+								x++;
+							}
 						}
 					}
 				}
-			}
-			if (args.length == 2){
-				if (args[0].equalsIgnoreCase("smileys")){
-					if(sender.hasPermission("smileychat.list")){
-						if (args[1].equalsIgnoreCase("misc")){
-							int x = 0;
-							sender.sendMessage(ChatColor.AQUA + "---[Smileychat] List---");
-							while(x < 35){
-								sender.sendMessage(ChatColor.YELLOW + net.flamm3blemuff1n.SmileyChat.Smileys.smiley[x] + " : " + ChatColor.AQUA +this.getConfig().getString(net.flamm3blemuff1n.SmileyChat.Smileys.names[x]));
-								x++;
-							}
-						}else if(args[1].equalsIgnoreCase("weather")){
-							int x = 35;
-							sender.sendMessage(ChatColor.AQUA + "---[Smileychat] List---");
-							while(x < 47){
-								sender.sendMessage(ChatColor.YELLOW + net.flamm3blemuff1n.SmileyChat.Smileys.smiley[x] + " : " + ChatColor.AQUA +this.getConfig().getString(net.flamm3blemuff1n.SmileyChat.Smileys.names[x]));
-								x++;
-							}
-						}else if(args[1].equalsIgnoreCase("cards")){
-							int x = 47;
-							sender.sendMessage(ChatColor.AQUA + "---[Smileychat] List---");
-							while(x < 55){
-								sender.sendMessage(ChatColor.YELLOW + net.flamm3blemuff1n.SmileyChat.Smileys.smiley[x] + " : " + ChatColor.AQUA +this.getConfig().getString(net.flamm3blemuff1n.SmileyChat.Smileys.names[x]));
-								x++;
-							}
-						}else if(args[1].equalsIgnoreCase("directions")){
-							int x = 55;
-							sender.sendMessage(ChatColor.AQUA + "---[Smileychat] List---");
-							while(x < 63){
-								sender.sendMessage(ChatColor.YELLOW + net.flamm3blemuff1n.SmileyChat.Smileys.smiley[x] + " : " + ChatColor.AQUA +this.getConfig().getString(net.flamm3blemuff1n.SmileyChat.Smileys.names[x]));
-								x++;
-							}
-						}else if(args[1].equalsIgnoreCase("chess")){
-							int x = 63;
-							sender.sendMessage(ChatColor.AQUA + "---[Smileychat] List---");
-							while(x < 75){
-								sender.sendMessage(ChatColor.YELLOW + net.flamm3blemuff1n.SmileyChat.Smileys.smiley[x] + " : " + ChatColor.AQUA +this.getConfig().getString(net.flamm3blemuff1n.SmileyChat.Smileys.names[x]));
-								x++;
-							}
-						}else if(args[1].equalsIgnoreCase("zod")){
-							int x = 75;
-							sender.sendMessage(ChatColor.AQUA + "---[Smileychat] List---");
-							while(x < 87){
-								sender.sendMessage(ChatColor.YELLOW + net.flamm3blemuff1n.SmileyChat.Smileys.smiley[x] + " : " + ChatColor.AQUA +this.getConfig().getString(net.flamm3blemuff1n.SmileyChat.Smileys.names[x]));
-								x++;
+				if (args.length == 2){
+					if (args[0].equalsIgnoreCase("smileys")){
+						if(sender.hasPermission("smileychat.list")){
+							if (args[1].equalsIgnoreCase("misc")){
+								int x = 0;
+								sender.sendMessage(ChatColor.AQUA + "---[Smileychat] List---");
+								while(x < 35){
+									sender.sendMessage(ChatColor.YELLOW + net.flamm3blemuff1n.SmileyChat.Smileys.smiley[x] + " : " + ChatColor.AQUA +this.getConfig().getString(net.flamm3blemuff1n.SmileyChat.Smileys.names[x]));
+									x++;
+								}
+							}else if(args[1].equalsIgnoreCase("weather")){
+								int x = 35;
+								sender.sendMessage(ChatColor.AQUA + "---[Smileychat] List---");
+								while(x < 47){
+									sender.sendMessage(ChatColor.YELLOW + net.flamm3blemuff1n.SmileyChat.Smileys.smiley[x] + " : " + ChatColor.AQUA +this.getConfig().getString(net.flamm3blemuff1n.SmileyChat.Smileys.names[x]));
+									x++;
+								}
+							}else if(args[1].equalsIgnoreCase("cards")){
+								int x = 47;
+								sender.sendMessage(ChatColor.AQUA + "---[Smileychat] List---");
+								while(x < 55){
+									sender.sendMessage(ChatColor.YELLOW + net.flamm3blemuff1n.SmileyChat.Smileys.smiley[x] + " : " + ChatColor.AQUA +this.getConfig().getString(net.flamm3blemuff1n.SmileyChat.Smileys.names[x]));
+									x++;
+								}
+							}else if(args[1].equalsIgnoreCase("directions")){
+								int x = 55;
+								sender.sendMessage(ChatColor.AQUA + "---[Smileychat] List---");
+								while(x < 63){
+									sender.sendMessage(ChatColor.YELLOW + net.flamm3blemuff1n.SmileyChat.Smileys.smiley[x] + " : " + ChatColor.AQUA +this.getConfig().getString(net.flamm3blemuff1n.SmileyChat.Smileys.names[x]));
+									x++;
+								}
+							}else if(args[1].equalsIgnoreCase("chess")){
+								int x = 63;
+								sender.sendMessage(ChatColor.AQUA + "---[Smileychat] List---");
+								while(x < 75){
+									sender.sendMessage(ChatColor.YELLOW + net.flamm3blemuff1n.SmileyChat.Smileys.smiley[x] + " : " + ChatColor.AQUA +this.getConfig().getString(net.flamm3blemuff1n.SmileyChat.Smileys.names[x]));
+									x++;
+								}
+							}else if(args[1].equalsIgnoreCase("zod")){
+								int x = 75;
+								sender.sendMessage(ChatColor.AQUA + "---[Smileychat] List---");
+								while(x < 87){
+									sender.sendMessage(ChatColor.YELLOW + net.flamm3blemuff1n.SmileyChat.Smileys.smiley[x] + " : " + ChatColor.AQUA +this.getConfig().getString(net.flamm3blemuff1n.SmileyChat.Smileys.names[x]));
+									x++;
+								}
 							}
 						}
 					}
