@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 
 import net.flamm3blemuff1n.SmileyChat.UpdateChecker.UpdateResult;
 import net.flamm3blemuff1n.SmileyChat.UpdateChecker.UpdateType;
-import net.minecraft.server.v1_9_R1.SharedConstants;
+import net.minecraft.server.v1_10_R1.SharedConstants;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
