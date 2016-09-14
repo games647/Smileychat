@@ -107,3 +107,6 @@ permissions:
     smileychat.update:
         description: get notification on updates
         default: op
+    smileychat.list:
+        description: access to list command
+        default: op
