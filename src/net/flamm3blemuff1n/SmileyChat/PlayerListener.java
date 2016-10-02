@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.PlayerChatEvent;
@@ -20,12 +21,12 @@ public class PlayerListener implements Listener{
 		plugin = instance;
 	}
 	
-		@EventHandler
+		@EventHandler(priority = EventPriority.LOW)
 		public void chat(AsyncPlayerChatEvent event){
-			if(this.plugin.getConfig().getBoolean("Async") == true){
+			if(this.plugin.getConfig().getBoolean("Async")){
 				String message = event.getMessage();
 				
-				if(this.plugin.getConfig().getBoolean("chat") == true){
+				if(this.plugin.getConfig().getBoolean("chat")){
 					if(event.getPlayer().hasPermission("smileychat.chat.smileys")){
 						int x = 0;
 						while(x < net.flamm3blemuff1n.SmileyChat.Smileys.names.length){
@@ -54,12 +55,12 @@ public class PlayerListener implements Listener{
 			}
 		}
 	
-	@EventHandler
+	@EventHandler(priority = EventPriority.LOW)
 	public void chat(PlayerChatEvent event){
-		if(this.plugin.getConfig().getBoolean("Async") == false){
+		if(!this.plugin.getConfig().getBoolean("Async")){
 			String message = event.getMessage();
 		
-			if(this.plugin.getConfig().getBoolean("chat") == true){
+			if(this.plugin.getConfig().getBoolean("chat")){
 				if(event.getPlayer().hasPermission("smileychat.chat.smileys")){
 					int x = 0;
 					while(x < net.flamm3blemuff1n.SmileyChat.Smileys.names.length){
@@ -88,11 +89,11 @@ public class PlayerListener implements Listener{
 		}
 	}
 	
-	@EventHandler
+	@EventHandler(priority = EventPriority.LOW)
 	public void onPlayerCommandPreprocessEvent(PlayerCommandPreprocessEvent event){
 		String command = event.getMessage();
 		
-		if(this.plugin.getConfig().getBoolean("Use-commands") == true){
+		if(this.plugin.getConfig().getBoolean("Use-commands")){
 			if(event.getPlayer().hasPermission("smileychat.command.smileys")){
 				int x = 0;
 				while(x < net.flamm3blemuff1n.SmileyChat.Smileys.names.length){
@@ -119,9 +120,9 @@ public class PlayerListener implements Listener{
 			}
 		}
 	}
-	@EventHandler
+	@EventHandler(priority = EventPriority.LOW)
 	public void onSignCreate(SignChangeEvent event){
-		if(this.plugin.getConfig().getBoolean("Use-signs") == true){
+		if(this.plugin.getConfig().getBoolean("Use-signs")){
 			String sign0 = event.getLine(0);
 			String sign1 = event.getLine(1);
 			String sign2 = event.getLine(2);
@@ -174,13 +175,13 @@ public class PlayerListener implements Listener{
 			}
 		}
 	}
-	@EventHandler
+	@EventHandler(priority = EventPriority.LOW)
 	public void OnBookCreate(PlayerEditBookEvent event){
 		BookMeta bm = event.getNewBookMeta();
 		String Author = bm.getAuthor();
 		String Title = bm.getTitle();
 		
-		if(this.plugin.getConfig().getBoolean("Use-books") == true){
+		if(this.plugin.getConfig().getBoolean("Use-books")){
 			if(event.getPlayer().hasPermission("smileychat.book.smileys")){
 				if(bm.hasAuthor()){
 					int x = 0;
